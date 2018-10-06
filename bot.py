@@ -1,12 +1,18 @@
 import telebot
+
+
 # main variables
-TOKEN = "577718731:AAFM0HCzyuUb-K1jEkQKl83N4_jJxNuDdJI"
+
+import ignorefile
+TOKEN = ignorefile.TOKEN
 bot = telebot.TeleBot(TOKEN)
+
 
 # handlers
 @bot.message_handler(commands=['start', 'go'])
 def start_handler(message):
     bot.send_message(message.chat.id, 'Привет')
+
 
 @bot.message_handler(content_types=['text'])
 def text_handler(message):
@@ -18,5 +24,6 @@ def text_handler(message):
         bot.send_message(chat_id, 'Хорошо, а у тебя?')
     else:
         bot.send_message(chat_id, 'Простите, я вас не понял :(')
+
 
 bot.polling(none_stop=True, timeout=123)
